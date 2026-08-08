@@ -7,3 +7,8 @@ from .serializers import QuoteSerializer
 class QuoteListCreate(generics.ListCreateAPIView):
   queryset = Quote.objects.all()
   serializer_class = QuoteSerializer
+
+class QuoteRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+  queryset = Quote.objects.all()
+  serializer_class = QuoteSerializer
+  lookup_field = "pk"
