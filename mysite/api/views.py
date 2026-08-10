@@ -18,3 +18,15 @@ class QuoteRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
   queryset = Quote.objects.all()
   serializer_class = QuoteSerializer
   lookup_field = "pk"
+
+class QuoteList(APIView):
+  def get(self, request, format=None):
+    quote = request.query_params.get("quote", "")
+
+    if quote:
+      quotes = Quote.objects.filter(quote__icontains=quote)
+    else:
+      quotes = Quote.objects.all()
+
+    serializer = QuoteSerializer(quotes, many=True)
+    return Response(serializer.data, status=status.HTTP_200_OK)

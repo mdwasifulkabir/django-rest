@@ -5,3 +5,4 @@ class QuoteSerializer(serializers.ModelSerializer):
   class Meta:
     model = Quote
     fields = ["id", "quote", "source"]
+
